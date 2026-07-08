@@ -1,0 +1,195 @@
+const state = {
+  status: "all",
+  priority: "all",
+  search: "",
+  risk: "all",
+  automationRuns: 0
+};
+
+function qs(selector) {
+  const node = document.querySelector(selector);
+  if (!node) throw new Error(`Missing element ${selector}`);
+  return node;
+}
+
+async function api(path, options) {
+  const response = await fetch(path, options);
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.json();
+}
+
+function money(value) {
+  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value);
+}
+
+function label(value) {
+  return value.replaceAll("_", " ").replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function riskLoad(project) {
+  return Math.min(100, Math.max(8, project.marginGap * 8 + (project.risk === "critical" ? 26 : 0)));
+}
+
+function renderSummary(summary) {
+  qs("#totalMarginPercent").textContent = `${summary.totalMarginPercent}%`;
+  qs("#totalMarginDollars").textContent = `${money(summary.totalMarginDollars)} forecast profit`;
+  qs("#marginAtRisk").textContent = money(summary.marginAtRisk);
+  qs("#crewUtilization").textContent = `${summary.crewUtilization}%`;
+  qs("#openWorkOrders").textContent = String(summary.openWorkOrders);
+  qs("#materialShortages").textContent = String(summary.materialShortages);
+  qs("#pendingInvoices").textContent = money(summary.pendingInvoices);
+  qs("#invoiceCount").textContent = `${summary.invoiceCount} invoices`;
+}
+
+function renderMarginMap(projects) {
+  const positions = [
+    { x: 14, y: 26 },
+    { x: 39, y: 17 },
+    { x: 65, y: 30 },
+    { x: 28, y: 63 },
+    { x: 57, y: 70 },
+    { x: 79, y: 56 }
+  ];
+
+  qs("#marginMap").innerHTML = projects.map((project, index) => {
+    const point = positions[index % positions.length];
+    const size = 58 + riskLoad(project) * 0.42;
+    return `
+      <article class="map-node ${project.risk}" style="--x:${point.x}%; --y:${point.y}%; --size:${size}px">
+        <span>${project.id.replace("P-", "")}</span>
+        <strong>${project.forecastMargin}%</strong>
+        <small>${money(project.marginAtRisk)}</small>
+      </article>
+    `;
+  }).join("");
+}
+
+function renderProjects(projects) {
+  const visible = state.risk === "all" ? projects : projects.filter((project) => project.risk === state.risk);
+  qs("#projectBoard").innerHTML = visible.map((project) => `
+    <article class="project-card ${project.risk}">
+      <header>
+        <span>${project.id}</span>
+        <b>${project.risk}</b>
+      </header>
+      <strong>${project.name}</strong>
+      <small>${project.segment} | ${project.customer}</small>
+      <div class="project-metrics">
+        <div><span>${project.progress}%</span><small>progress</small></div>
+        <div><span>${project.forecastMargin}%</span><small>margin</small></div>
+        <div><span>${project.healthScore}</span><small>score</small></div>
+      </div>
+      <div class="risk-meter"><i style="width:${riskLoad(project)}%"></i></div>
+      <footer><span>${money(project.marginAtRisk)}</span><small>margin at risk</small></footer>
+    </article>
+  `).join("");
+}
+
+function renderAlerts(payload) {
+  qs("#alertList").innerHTML = payload.alerts.map((item) => `
+    <article class="decision-card ${item.severity}">
+      <span>!</span>
+      <div>
+        <strong>${item.title}</strong>
+        <small>${item.detail}</small>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderAutomations(payload) {
+  qs("#automationList").innerHTML = payload.suggestions.map((item) => `
+    <article class="automation-item">
+      <span>${item.channel.slice(0, 2).toUpperCase()}</span>
+      <div>
+        <strong>${item.action}</strong>
+        <small>${item.count} items | ${item.impact}</small>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderWorkOrders(payload) {
+  qs("#workOrderCount").textContent = `${payload.count} active work orders`;
+  qs("#workOrderBody").innerHTML = payload.workOrders.map((order) => `
+    <article class="timeline-item ${order.priority}">
+      <span class="timeline-pin"></span>
+      <div>
+        <strong>${order.id} | ${order.projectName}</strong>
+        <small>${order.type} | ${order.assignee}</small>
+      </div>
+      <b>${label(order.status)}</b>
+      <em>${order.dueDate}</em>
+      <span class="sla ${order.sla}">${label(order.sla)}</span>
+      <strong>${money(order.estimatedValue)}</strong>
+    </article>
+  `).join("");
+}
+
+function renderInvoices(payload) {
+  qs("#invoiceBody").innerHTML = payload.invoices.map((invoice) => `
+    <article class="invoice-card ${invoice.state}">
+      <span>${invoice.id}</span>
+      <strong>${money(invoice.amount)}</strong>
+      <small>${invoice.projectName}</small>
+      <b>${label(invoice.state)}</b>
+    </article>
+  `).join("");
+}
+
+async function loadDashboard() {
+  const params = new URLSearchParams({ status: state.status, priority: state.priority, search: state.search });
+  const [summary, projects, alerts, automations, workOrders, invoices] = await Promise.all([
+    api("/api/summary"),
+    api("/api/projects"),
+    api("/api/alerts"),
+    api("/api/automations"),
+    api(`/api/work-orders?${params}`),
+    api("/api/invoices")
+  ]);
+
+  renderSummary(summary);
+  renderMarginMap(projects.projects);
+  renderProjects(projects.projects);
+  renderAlerts(alerts);
+  renderAutomations(automations);
+  renderWorkOrders(workOrders);
+  renderInvoices(invoices);
+}
+
+async function runAutomations() {
+  const result = await api("/api/automations/run", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ limit: 3 })
+  });
+
+  state.automationRuns += result.sent;
+  qs("#automationLog").textContent = `${result.sent} sent | ${state.automationRuns} this session`;
+}
+
+function bindEvents() {
+  qs("#refreshBtn").addEventListener("click", loadDashboard);
+  qs("#runAutomationBtn").addEventListener("click", runAutomations);
+  qs("#riskFilter").addEventListener("change", (event) => {
+    state.risk = (event.target).value;
+    loadDashboard();
+  });
+  qs("#statusFilter").addEventListener("change", (event) => {
+    state.status = (event.target).value;
+    loadDashboard();
+  });
+  qs("#priorityFilter").addEventListener("change", (event) => {
+    state.priority = (event.target).value;
+    loadDashboard();
+  });
+  qs("#searchInput").addEventListener("input", (event) => {
+    state.search = (event.target).value;
+    loadDashboard();
+  });
+}
+
+bindEvents();
+loadDashboard().catch((error) => {
+  qs("#automationLog").textContent = error.message;
+});
