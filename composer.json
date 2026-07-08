@@ -1,0 +1,18 @@
+{
+  "name": "portfolio/fieldops-margin-control",
+  "description": "Commercial PHP API and TypeScript dashboard for field-service margin control.",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "FieldOps\\": "src/"
+    }
+  },
+  "scripts": {
+    "serve": "php -S 127.0.0.1:8080 -t public",
+    "lint": "php -l public/index.php && php -l src/Support/Response.php && php -l src/Data/FieldOpsRepository.php && php -l src/Services/MarginControlService.php && php -l src/Controllers/ApiController.php"
+  }
+}
