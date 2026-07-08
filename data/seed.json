@@ -1,0 +1,123 @@
+{
+  "company": {
+    "name": "FieldOps Margin Control",
+    "period": "May 12 - May 18, 2026",
+    "timezone": "America/New_York"
+  },
+  "projects": [
+    {
+      "id": "P-10045",
+      "name": "Riverside Office Buildout",
+      "customer": "Riverside Partners",
+      "segment": "Commercial Construction",
+      "progress": 62,
+      "contractValue": 1285000,
+      "actualCost": 972745,
+      "forecastCost": 1089600,
+      "marginTarget": 24,
+      "crew": "Crew 2",
+      "manager": "A. Miller",
+      "risk": "moderate"
+    },
+    {
+      "id": "P-10031",
+      "name": "Seaport Mechanical Upgrade",
+      "customer": "Seaport Holdings",
+      "segment": "HVAC",
+      "progress": 48,
+      "contractValue": 745000,
+      "actualCost": 586200,
+      "forecastCost": 671300,
+      "marginTarget": 22,
+      "crew": "Crew 5",
+      "manager": "D. James",
+      "risk": "high"
+    },
+    {
+      "id": "P-10027",
+      "name": "City Center Parking Garage",
+      "customer": "City Center Dev LLC",
+      "segment": "Concrete",
+      "progress": 38,
+      "contractValue": 1890000,
+      "actualCost": 1578000,
+      "forecastCost": 1732400,
+      "marginTarget": 18,
+      "crew": "Crew 3",
+      "manager": "R. Lopez",
+      "risk": "critical"
+    },
+    {
+      "id": "P-10018",
+      "name": "Greenway Apartments",
+      "customer": "Greenway Properties",
+      "segment": "Electrical",
+      "progress": 71,
+      "contractValue": 986000,
+      "actualCost": 721900,
+      "forecastCost": 790600,
+      "marginTarget": 21,
+      "crew": "Crew 1",
+      "manager": "J. Patel",
+      "risk": "low"
+    },
+    {
+      "id": "P-10012",
+      "name": "Harbor Hospital HVAC",
+      "customer": "Harbor Health",
+      "segment": "Healthcare HVAC",
+      "progress": 81,
+      "contractValue": 1420000,
+      "actualCost": 1088700,
+      "forecastCost": 1164000,
+      "marginTarget": 20,
+      "crew": "Crew 4",
+      "manager": "M. Chen",
+      "risk": "low"
+    },
+    {
+      "id": "P-10008",
+      "name": "Logistics Warehouse Retrofit",
+      "customer": "LogiStore Inc.",
+      "segment": "General Construction",
+      "progress": 27,
+      "contractValue": 940000,
+      "actualCost": 803600,
+      "forecastCost": 887900,
+      "marginTarget": 16,
+      "crew": "Crew 6",
+      "manager": "L. Brooks",
+      "risk": "critical"
+    }
+  ],
+  "workOrders": [
+    {"id":"WO-24681","projectId":"P-10045","type":"Electrical","priority":"high","status":"in_progress","assignee":"A. Miller / Crew 2","dueDate":"2026-05-20","sla":"at_risk","estimatedValue":18750},
+    {"id":"WO-24672","projectId":"P-10031","type":"HVAC","priority":"medium","status":"in_progress","assignee":"D. James / Crew 5","dueDate":"2026-05-19","sla":"on_track","estimatedValue":24390},
+    {"id":"WO-24660","projectId":"P-10027","type":"Concrete","priority":"high","status":"waiting_parts","assignee":"R. Lopez / Crew 3","dueDate":"2026-05-21","sla":"at_risk","estimatedValue":12680},
+    {"id":"WO-24655","projectId":"P-10018","type":"Electrical","priority":"low","status":"scheduled","assignee":"J. Patel / Crew 1","dueDate":"2026-05-24","sla":"on_track","estimatedValue":8950},
+    {"id":"WO-24649","projectId":"P-10012","type":"HVAC","priority":"medium","status":"in_progress","assignee":"M. Chen / Crew 4","dueDate":"2026-05-22","sla":"on_track","estimatedValue":31450},
+    {"id":"WO-24633","projectId":"P-10008","type":"General","priority":"critical","status":"blocked","assignee":"L. Brooks / Crew 6","dueDate":"2026-05-18","sla":"breached","estimatedValue":27600}
+  ],
+  "invoices": [
+    {"id":"INV-10345","projectId":"P-10045","customer":"Riverside Partners","amount":86240,"dueDate":"2026-05-20","state":"ready"},
+    {"id":"INV-10338","projectId":"P-10031","customer":"Seaport Holdings","amount":124680,"dueDate":"2026-05-19","state":"overdue"},
+    {"id":"INV-10325","projectId":"P-10027","customer":"City Center Dev LLC","amount":74510,"dueDate":"2026-05-23","state":"draft"},
+    {"id":"INV-10320","projectId":"P-10018","customer":"Greenway Properties","amount":56780,"dueDate":"2026-05-25","state":"ready"},
+    {"id":"INV-10318","projectId":"P-10008","customer":"LogiStore Inc.","amount":92430,"dueDate":"2026-05-26","state":"ready"}
+  ],
+  "materials": [
+    {"sku":"MAT-4401","name":"Copper conduit 3/4","projectId":"P-10031","available":18,"minimum":40,"impact":28600},
+    {"sku":"MAT-1190","name":"Fast-cure concrete mix","projectId":"P-10027","available":12,"minimum":55,"impact":64200},
+    {"sku":"MAT-8802","name":"HVAC filter bank","projectId":"P-10012","available":25,"minimum":20,"impact":0},
+    {"sku":"MAT-6104","name":"LED panel driver","projectId":"P-10045","available":9,"minimum":26,"impact":15480},
+    {"sku":"MAT-5008","name":"Dock seal kit","projectId":"P-10008","available":4,"minimum":18,"impact":37120}
+  ],
+  "crews": [
+    {"id":"Crew 1","lead":"J. Patel","utilization":77,"billableHours":168,"capacityHours":218},
+    {"id":"Crew 2","lead":"A. Miller","utilization":84,"billableHours":196,"capacityHours":234},
+    {"id":"Crew 3","lead":"R. Lopez","utilization":58,"billableHours":126,"capacityHours":218},
+    {"id":"Crew 4","lead":"M. Chen","utilization":73,"billableHours":164,"capacityHours":224},
+    {"id":"Crew 5","lead":"D. James","utilization":61,"billableHours":139,"capacityHours":228},
+    {"id":"Crew 6","lead":"L. Brooks","utilization":49,"billableHours":105,"capacityHours":214}
+  ]
+}
