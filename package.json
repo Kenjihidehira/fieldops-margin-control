@@ -1,0 +1,20 @@
+{
+  "name": "fieldops-margin-control",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "PHP + TypeScript operations dashboard for field-service margin control.",
+  "scripts": {
+    "build": "node scripts/build-ts.mjs",
+    "test": "node tests/business-rules.test.mjs && node tests/static-check.test.mjs",
+    "smoke": "node tests/smoke.test.mjs"
+  },
+  "keywords": [
+    "php",
+    "typescript",
+    "field-service",
+    "dashboard",
+    "portfolio"
+  ],
+  "license": "MIT"
+}
