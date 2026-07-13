@@ -42,7 +42,7 @@ try {
         ['GET', '/api/alerts'] => Response::json($controller->alerts()),
         ['GET', '/api/automations'] => Response::json($controller->automationSuggestions()),
         ['POST', '/api/automations/run'] => Response::json($controller->runAutomations(readJsonBody())),
-        default => Response::json(['error' => 'Route not found'], 404),
+        default => Response::json(['error' => 'Rota não encontrada'], 404),
     };
 } catch (Throwable $error) {
     Response::json(['error' => $error->getMessage()], 500);

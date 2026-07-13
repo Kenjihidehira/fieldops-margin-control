@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,98 +9,98 @@
   <body>
     <div class="app-shell">
       <aside class="sidebar">
-        <a class="brand" href="/" aria-label="FieldOps cockpit">
+        <a class="brand" href="/" aria-label="Cockpit FieldOps">
           <span class="brand-mark">F</span>
           <span><strong>FieldOps</strong><small>Margin Control</small></span>
         </a>
-        <nav class="nav-list" aria-label="Primary">
+        <nav class="nav-list" aria-label="Principal">
           <button class="nav-item active" type="button">Cockpit</button>
-          <button class="nav-item" type="button">Margin Heatmap</button>
-          <button class="nav-item" type="button">SLA Queue</button>
-          <button class="nav-item" type="button">Crew Load</button>
-          <button class="nav-item" type="button">Material Risk</button>
-          <button class="nav-item" type="button">Billing Pulse</button>
+          <button class="nav-item" type="button">Mapa de margem</button>
+          <button class="nav-item" type="button">Fila de SLA</button>
+          <button class="nav-item" type="button">Carga da equipe</button>
+          <button class="nav-item" type="button">Risco de material</button>
+          <button class="nav-item" type="button">Pulso financeiro</button>
         </nav>
-        <section class="signal-stack" aria-label="System status">
+        <section class="signal-stack" aria-label="Status do sistema">
           <span><b></b> API online</span>
-          <span><b></b> Demo seed loaded</span>
-          <span><b></b> No external secrets</span>
+          <span><b></b> Seed demo carregado</span>
+          <span><b></b> Sem secrets externos</span>
         </section>
       </aside>
 
       <main class="workspace">
         <header class="topbar">
           <div>
-            <p>Operations Cockpit</p>
-            <h1>Field margin command center</h1>
+            <p>Cockpit operacional</p>
+            <h1>Central de margem em campo</h1>
           </div>
           <div class="topbar-controls">
-            <select id="companyFilter" aria-label="Company">
-              <option>All companies</option>
-              <option>Commercial division</option>
-              <option>Service division</option>
+            <select id="companyFilter" aria-label="Empresa">
+              <option>Todas as empresas</option>
+              <option>Divisão comercial</option>
+              <option>Divisão de serviços</option>
             </select>
             <select id="periodFilter" aria-label="Period">
               <option>May 12 - May 18, 2026</option>
               <option>May 05 - May 11, 2026</option>
             </select>
-            <button id="refreshBtn" class="icon-button" type="button" aria-label="Refresh">R</button>
-            <button id="runAutomationBtn" class="primary-button" type="button">Auto Dispatch</button>
+            <button id="refreshBtn" class="icon-button" type="button" aria-label="Atualizar">R</button>
+            <button id="runAutomationBtn" class="primary-button" type="button">Despacho automático</button>
           </div>
         </header>
 
         <section class="cockpit-grid">
           <section class="hero-cockpit" aria-labelledby="heatmapTitle">
             <div class="hero-copy">
-              <p>Margin Heatmap</p>
-              <h2 id="heatmapTitle">Project risk constellation</h2>
-              <span id="automationLog" class="status-chip">Automation layer idle</span>
+              <p>Mapa de margem</p>
+              <h2 id="heatmapTitle">Constelação de risco dos projetos</h2>
+              <span id="automationLog" class="status-chip">Camada de automação ociosa</span>
             </div>
-            <div class="metric-ribbon" aria-label="Performance indicators">
+            <div class="metric-ribbon" aria-label="Indicadores de desempenho">
               <article>
-                <span>Total margin</span>
+                <span>Margem total</span>
                 <strong id="totalMarginPercent">0%</strong>
-                <small id="totalMarginDollars">$0 forecast profit</small>
+                <small id="totalMarginDollars">$0 lucro previsto</small>
               </article>
               <article>
-                <span>Margin at risk</span>
+                <span>Margem em risco</span>
                 <strong id="marginAtRisk">$0</strong>
-                <small>Under target projects</small>
+                <small>Projetos abaixo da meta</small>
               </article>
               <article>
-                <span>Crew Load</span>
+                <span>Carga da equipe</span>
                 <strong id="crewUtilization">0%</strong>
-                <small>Billable capacity</small>
+                <small>Capacidade faturável</small>
               </article>
               <article>
-                <span>Open work orders</span>
+                <span>Ordens abertas</span>
                 <strong id="openWorkOrders">0</strong>
-                <small>Dispatch queue</small>
+                <small>Fila de despacho</small>
               </article>
               <article>
-                <span>Material Risk</span>
+                <span>Risco de material</span>
                 <strong id="materialShortages">0</strong>
-                <small>Purchasing risk</small>
+                <small>Risco de compras</small>
               </article>
               <article>
-                <span>Billing Pulse</span>
+                <span>Pulso financeiro</span>
                 <strong id="pendingInvoices">$0</strong>
                 <small id="invoiceCount">0 invoices</small>
               </article>
             </div>
-            <div id="marginMap" class="margin-map" aria-label="Project margin heatmap"></div>
+            <div id="marginMap" class="margin-map" aria-label="Mapa de margem dos projetos"></div>
           </section>
 
           <aside class="decision-rail" aria-labelledby="decisionTitle">
             <div class="rail-header">
-              <p>Decision Queue</p>
-              <h2 id="decisionTitle">SLA Queue</h2>
+              <p>Fila de decisão</p>
+              <h2 id="decisionTitle">Fila de SLA</h2>
             </div>
             <div id="alertList" class="alert-list"></div>
             <div class="automation-dock">
               <div class="rail-header compact">
-                <p>Auto Dispatch</p>
-                <h2>Automation suggestions</h2>
+                <p>Despacho automático</p>
+                <h2>Sugestões de automação</h2>
               </div>
               <div id="automationList" class="automation-list"></div>
             </div>
@@ -109,15 +109,15 @@
           <section class="project-dock" aria-labelledby="projectTitle">
             <div class="section-heading">
               <div>
-                <p>Live Projects</p>
-                <h2 id="projectTitle">Margin recovery board</h2>
+                <p>Projetos ativos</p>
+                <h2 id="projectTitle">Quadro de recuperação de margem</h2>
               </div>
-              <select id="riskFilter" aria-label="Project risk">
-                <option value="all">All risk</option>
-                <option value="critical">Critical</option>
-                <option value="high">High</option>
-                <option value="moderate">Moderate</option>
-                <option value="low">Low</option>
+              <select id="riskFilter" aria-label="Risco do projeto">
+                <option value="all">Todos os riscos</option>
+                <option value="critical">Crítico</option>
+                <option value="high">Alto</option>
+                <option value="moderate">Moderado</option>
+                <option value="low">Baixo</option>
               </select>
             </div>
             <div id="projectBoard" class="project-board"></div>
@@ -126,24 +126,24 @@
           <section class="timeline-panel" aria-labelledby="ordersTitle">
             <div class="section-heading">
               <div>
-                <p id="workOrderCount">Loading work orders...</p>
-                <h2 id="ordersTitle">Open work orders timeline</h2>
+                <p id="workOrderCount">Carregando ordens de serviço...</p>
+                <h2 id="ordersTitle">Linha do tempo de ordens abertas</h2>
               </div>
               <div class="filters">
-                <input id="searchInput" type="search" placeholder="Search project, customer or WO">
+                <input id="searchInput" type="search" placeholder="Buscar projeto, cliente ou OS">
                 <select id="statusFilter" aria-label="Status">
-                  <option value="all">All status</option>
-                  <option value="in_progress">In progress</option>
-                  <option value="waiting_parts">Waiting parts</option>
-                  <option value="scheduled">Scheduled</option>
-                  <option value="blocked">Blocked</option>
+                  <option value="all">Todos os status</option>
+                  <option value="in_progress">Em andamento</option>
+                  <option value="waiting_parts">Aguardando peças</option>
+                  <option value="scheduled">Agendada</option>
+                  <option value="blocked">Bloqueada</option>
                 </select>
-                <select id="priorityFilter" aria-label="Priority">
-                  <option value="all">All priority</option>
-                  <option value="critical">Critical</option>
-                  <option value="high">High</option>
-                  <option value="medium">Medium</option>
-                  <option value="low">Low</option>
+                <select id="priorityFilter" aria-label="Prioridade">
+                  <option value="all">Todas as prioridades</option>
+                  <option value="critical">Crítica</option>
+                  <option value="high">Alta</option>
+                  <option value="medium">Média</option>
+                  <option value="low">Baixa</option>
                 </select>
               </div>
             </div>
@@ -153,8 +153,8 @@
           <section class="billing-panel" aria-labelledby="invoiceTitle">
             <div class="section-heading compact">
               <div>
-                <p>Cash Signal</p>
-                <h2 id="invoiceTitle">Pending invoices</h2>
+                <p>Sinal de caixa</p>
+                <h2 id="invoiceTitle">Invoices pendentes</h2>
               </div>
             </div>
             <div id="invoiceBody" class="invoice-grid"></div>

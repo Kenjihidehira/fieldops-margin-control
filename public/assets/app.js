@@ -19,11 +19,29 @@ async function api(path, options) {
 }
 
 function money(value) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value);
+  return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(value);
 }
 
 function label(value) {
-  return value.replaceAll("_", " ").replace(/\b\w/g, (char) => char.toUpperCase());
+  const labels = {
+    all: "Todos",
+    in_progress: "Em andamento",
+    waiting_parts: "Aguardando peças",
+    scheduled: "Agendada",
+    blocked: "Bloqueada",
+    closed: "Fechada",
+    on_track: "No prazo",
+    at_risk: "Em risco",
+    delayed: "Atrasada",
+    critical: "Crítico",
+    high: "Alto",
+    moderate: "Moderado",
+    low: "Baixo",
+    ready: "Pronta",
+    overdue: "Vencida",
+    draft: "Rascunho"
+  };
+  return labels[value] ?? value.replaceAll("_", " ").replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
 function riskLoad(project) {
@@ -32,7 +50,7 @@ function riskLoad(project) {
 
 function renderSummary(summary) {
   qs("#totalMarginPercent").textContent = `${summary.totalMarginPercent}%`;
-  qs("#totalMarginDollars").textContent = `${money(summary.totalMarginDollars)} forecast profit`;
+  qs("#totalMarginDollars").textContent = `${money(summary.totalMarginDollars)} lucro previsto`;
   qs("#marginAtRisk").textContent = money(summary.marginAtRisk);
   qs("#crewUtilization").textContent = `${summary.crewUtilization}%`;
   qs("#openWorkOrders").textContent = String(summary.openWorkOrders);
@@ -75,12 +93,12 @@ function renderProjects(projects) {
       <strong>${project.name}</strong>
       <small>${project.segment} | ${project.customer}</small>
       <div class="project-metrics">
-        <div><span>${project.progress}%</span><small>progress</small></div>
-        <div><span>${project.forecastMargin}%</span><small>margin</small></div>
+        <div><span>${project.progress}%</span><small>progresso</small></div>
+        <div><span>${project.forecastMargin}%</span><small>margem</small></div>
         <div><span>${project.healthScore}</span><small>score</small></div>
       </div>
       <div class="risk-meter"><i style="width:${riskLoad(project)}%"></i></div>
-      <footer><span>${money(project.marginAtRisk)}</span><small>margin at risk</small></footer>
+      <footer><span>${money(project.marginAtRisk)}</span><small>margem em risco</small></footer>
     </article>
   `).join("");
 }
@@ -103,14 +121,14 @@ function renderAutomations(payload) {
       <span>${item.channel.slice(0, 2).toUpperCase()}</span>
       <div>
         <strong>${item.action}</strong>
-        <small>${item.count} items | ${item.impact}</small>
+        <small>${item.count} itens | ${item.impact}</small>
       </div>
     </article>
   `).join("");
 }
 
 function renderWorkOrders(payload) {
-  qs("#workOrderCount").textContent = `${payload.count} active work orders`;
+  qs("#workOrderCount").textContent = `${payload.count} ordens de serviço ativas`;
   qs("#workOrderBody").innerHTML = payload.workOrders.map((order) => `
     <article class="timeline-item ${order.priority}">
       <span class="timeline-pin"></span>
@@ -165,7 +183,7 @@ async function runAutomations() {
   });
 
   state.automationRuns += result.sent;
-  qs("#automationLog").textContent = `${result.sent} sent | ${state.automationRuns} this session`;
+  qs("#automationLog").textContent = `${result.sent} enviadas | ${state.automationRuns} nesta sessão`;
 }
 
 function bindEvents() {

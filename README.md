@@ -1,56 +1,56 @@
 # FieldOps Margin Control
 
-Commercial PHP + TypeScript dashboard for construction and field-service companies that need to protect project margin while coordinating crews, materials, work orders and invoices.
+Dashboard comercial em PHP + TypeScript para empresas de obras e serviços de campo que precisam proteger margem de projeto enquanto coordenam equipes, materiais, ordens de serviço e faturamento.
 
-This is a portfolio-grade business system, not a tutorial scaffold. It demonstrates a PHP API organized with controller/service/repository layers and a TypeScript frontend that consumes live endpoints.
+Este é um sistema de negócio para portfólio, não um scaffold de tutorial. Ele demonstra uma API PHP organizada em camadas de controller, service e repository, além de um frontend TypeScript consumindo endpoints reais.
 
-## Business Value
+## Valor Comercial
 
-Field-service companies often lose margin through delayed work orders, material shortages, underused crews and slow invoicing. This app gives an operations manager one control tower for:
+Empresas de serviço em campo costumam perder margem por atrasos em ordens de serviço, falta de materiais, equipes subutilizadas e faturamento lento. Este app dá ao gerente operacional uma torre de controle para:
 
-- Project margin forecast and margin-at-risk visibility
-- Crew utilization monitoring
-- SLA delay alerts
-- Material shortage impact
-- Work-order filtering
-- Invoice readiness
-- Simulated automation batches for purchasing, billing and dispatch
+- Previsão de margem por projeto e margem em risco.
+- Monitoramento de utilização de equipes.
+- Alertas de atraso de SLA.
+- Impacto financeiro de falta de materiais.
+- Filtro de ordens de serviço.
+- Prontidão de faturamento.
+- Simulação de automações para compras, cobrança e despacho.
 
 ## Stack
 
-- PHP 8.2+ with a lightweight MVC-style API
-- TypeScript frontend source in `resources/ts/app.ts`
-- Compiled browser module in `public/assets/app.js`
-- CSS dashboard system in `public/assets/styles.css`
-- JSON seed data in `data/seed.json`
-- Node-based validation scripts without external packages
-- Dockerfile for PHP runtime deployment
+- PHP 8.2+ com API leve em estilo MVC
+- Fonte TypeScript em `resources/ts/app.ts`
+- Módulo compilado para navegador em `public/assets/app.js`
+- Sistema visual do dashboard em `public/assets/styles.css`
+- Dados seed JSON em `data/seed.json`
+- Scripts de validação em Node sem pacotes externos
+- Dockerfile para deploy com runtime PHP
 
-## Screens / Preview
+## Telas / Preview
 
-Preview asset:
+Preview visual:
 
 ```text
 docs/dashboard-preview.svg
 ```
 
-Primary UI:
+Interface principal:
 
-- KPI strip for margin, risk, crew utilization, work orders, materials and invoices
-- Project margin board with risk rail
-- Alert queue
-- Automation suggestions
-- Work-order and invoice tables
+- Faixa de KPIs de margem, risco, utilização de equipe, ordens, materiais e faturamento.
+- Quadro de margem por projeto com indicação de risco.
+- Fila de alertas.
+- Sugestões de automação.
+- Tabelas de ordens de serviço e invoices.
 
-## API Endpoints
+## Endpoints da API
 
-Documented in:
+Documentados em:
 
 ```text
 docs/api-endpoints.md
 ```
 
-Key endpoints:
+Principais endpoints:
 
 - `GET /api/health`
 - `GET /api/summary`
@@ -61,29 +61,29 @@ Key endpoints:
 - `GET /api/automations`
 - `POST /api/automations/run`
 
-## Run Locally
+## Como Rodar Localmente
 
-Install PHP 8.2+.
+Instale PHP 8.2+.
 
 ```bash
 php -S 127.0.0.1:8080 -t public
 ```
 
-Open:
+Acesse:
 
 ```text
 http://127.0.0.1:8080
 ```
 
-## Build TypeScript
+## Build do TypeScript
 
-This repository intentionally avoids npm dependencies. The build script transpiles the project TypeScript source used here into a browser module.
+O repositório evita dependências npm de propósito. O script de build transpila o TypeScript usado aqui para um módulo de navegador.
 
 ```bash
 node scripts/build-ts.mjs
 ```
 
-## Validation
+## Validação
 
 ```bash
 node scripts/build-ts.mjs
@@ -92,7 +92,7 @@ node tests/static-check.test.mjs
 node tests/smoke.test.mjs
 ```
 
-If PHP is available:
+Se PHP estiver disponível:
 
 ```bash
 composer run lint
@@ -106,19 +106,19 @@ docker build -t fieldops-margin-control .
 docker run --rm -p 8080:8080 fieldops-margin-control
 ```
 
-## Commercial Differentials
+## Diferenciais Comerciais
 
-- Practical financial operations domain, useful in freelance proposals
-- API-first backend structure that can evolve into Laravel
-- TypeScript frontend with real filtering and automation state
-- Seed data models project economics, work orders, materials, invoices and crews
-- Demo-safe automation simulation without external services or secrets
+- Domínio operacional e financeiro prático, útil em propostas freelance.
+- Backend API-first que pode evoluir para Laravel.
+- Frontend TypeScript com filtros reais e estado de automação.
+- Seed modelando economia de projetos, ordens, materiais, invoices e equipes.
+- Simulação de automação segura para demo, sem serviços externos ou secrets.
 
-## Possible Improvements
+## Melhorias Possíveis
 
-- Replace JSON seed with MySQL/PostgreSQL
-- Add Laravel migration/controllers if Composer is available
-- Add authentication and role-based permissions
-- Add PDF invoice export
-- Add webhook integrations for QuickBooks, Slack or WhatsApp
-- Add queue worker for real automation dispatch
+- Substituir seed JSON por MySQL/PostgreSQL.
+- Adicionar migrations/controllers Laravel se Composer estiver disponível.
+- Adicionar autenticação e permissões por perfil.
+- Exportar invoices em PDF.
+- Integrar webhooks com QuickBooks, Slack ou WhatsApp.
+- Criar worker de fila para automações reais.

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "PHP + TypeScript operations dashboard for field-service margin control.",
+  "description": "Dashboard operacional em PHP + TypeScript para controle de margem em serviços de campo.",
   "scripts": {
     "build": "node scripts/build-ts.mjs",
     "test": "node tests/business-rules.test.mjs && node tests/static-check.test.mjs",

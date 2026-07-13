@@ -69,7 +69,7 @@ final class MarginControlService
             return [
                 ...$order,
                 'projectName' => $project['name'] ?? $order['projectId'],
-                'customer' => $project['customer'] ?? 'Unknown customer',
+                'customer' => $project['customer'] ?? 'Cliente desconhecido',
             ];
         }, $this->repository->workOrders());
 
@@ -123,11 +123,11 @@ final class MarginControlService
         $overdueInvoices = array_filter($this->repository->invoices(), fn (array $invoice): bool => $invoice['state'] === 'overdue');
 
         return [
-            ['severity' => 'critical', 'title' => count($delayedOrders) . ' SLA delays', 'detail' => 'Work orders need dispatch attention.'],
-            ['severity' => 'high', 'title' => count($shortages) . ' material shortages', 'detail' => '$' . number_format(array_sum(array_column($shortages, 'impact'))) . ' margin impact.'],
-            ['severity' => 'high', 'title' => count($criticalProjects) . ' projects over budget', 'detail' => '$' . number_format(array_sum(array_column($criticalProjects, 'marginAtRisk'))) . ' forecast risk.'],
-            ['severity' => 'medium', 'title' => count($lowCrews) . ' crews below 60%', 'detail' => 'Rebalance labor before payroll close.'],
-            ['severity' => 'medium', 'title' => count($overdueInvoices) . ' overdue invoices', 'detail' => 'Cash collection workflow is ready.'],
+            ['severity' => 'critical', 'title' => count($delayedOrders) . ' atrasos de SLA', 'detail' => 'Ordens de serviço precisam de atenção do despacho.'],
+            ['severity' => 'high', 'title' => count($shortages) . ' faltas de material', 'detail' => 'R$ ' . number_format(array_sum(array_column($shortages, 'impact')), 0, ',', '.') . ' de impacto na margem.'],
+            ['severity' => 'high', 'title' => count($criticalProjects) . ' projetos acima do orçamento', 'detail' => 'R$ ' . number_format(array_sum(array_column($criticalProjects, 'marginAtRisk')), 0, ',', '.') . ' em risco previsto.'],
+            ['severity' => 'medium', 'title' => count($lowCrews) . ' equipes abaixo de 60%', 'detail' => 'Rebalancear mão de obra antes do fechamento da folha.'],
+            ['severity' => 'medium', 'title' => count($overdueInvoices) . ' invoices vencidas', 'detail' => 'Fluxo de cobrança já pode ser acionado.'],
         ];
     }
 
@@ -139,21 +139,21 @@ final class MarginControlService
 
         return [
             [
-                'action' => 'Auto-reorder materials',
-                'channel' => 'Purchasing',
-                'impact' => '$' . number_format(array_sum(array_column($shortages, 'impact'))) . ' protected margin',
+                'action' => 'Recomprar materiais automaticamente',
+                'channel' => 'Compras',
+                'impact' => 'R$ ' . number_format(array_sum(array_column($shortages, 'impact')), 0, ',', '.') . ' de margem protegida',
                 'count' => count($shortages),
             ],
             [
-                'action' => 'Send invoice reminders',
-                'channel' => 'Billing',
-                'impact' => '$' . number_format(array_sum(array_column($readyInvoices, 'amount'))) . ' ready to collect',
+                'action' => 'Enviar lembretes de invoice',
+                'channel' => 'Cobrança',
+                'impact' => 'R$ ' . number_format(array_sum(array_column($readyInvoices, 'amount')), 0, ',', '.') . ' prontos para cobrança',
                 'count' => count($readyInvoices),
             ],
             [
-                'action' => 'Escalate SLA delays',
-                'channel' => 'Dispatch',
-                'impact' => count($delayed) . ' work orders prioritized',
+                'action' => 'Escalar atrasos de SLA',
+                'channel' => 'Despacho',
+                'impact' => count($delayed) . ' ordens priorizadas',
                 'count' => count($delayed),
             ],
         ];
@@ -164,7 +164,7 @@ final class MarginControlService
         $items = array_slice($this->automationSuggestions(), 0, max(1, min($limit, 5)));
         return [
             'sent' => count($items),
-            'message' => count($items) . ' automation workflows simulated.',
+            'message' => count($items) . ' fluxos de automação simulados.',
             'items' => $items,
         ];
     }

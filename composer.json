@@ -1,6 +1,6 @@
 {
   "name": "portfolio/fieldops-margin-control",
-  "description": "Commercial PHP API and TypeScript dashboard for field-service margin control.",
+  "description": "API PHP comercial e dashboard TypeScript para controle de margem em serviços de campo.",
   "type": "project",
   "license": "MIT",
   "require": {

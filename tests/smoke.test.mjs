@@ -7,11 +7,11 @@ const docs = fs.readFileSync(new URL("../docs/api-endpoints.md", import.meta.url
 
 for (const text of [
   "FieldOps Margin Control",
-  "Margin Heatmap",
-  "Open work orders timeline",
-  "Automation suggestions",
-  "SLA Queue",
-  "Pending invoices"
+  "Mapa de margem",
+  "Linha do tempo de ordens abertas",
+  "Sugestões de automação",
+  "Fila de SLA",
+  "Invoices pendentes"
 ]) {
   assert.ok(html.includes(text), `HTML should include ${text}`);
 }
@@ -26,7 +26,7 @@ for (const endpoint of [
   assert.ok(app.includes(endpoint) || docs.includes(endpoint), `${endpoint} must be implemented/documented`);
 }
 
-assert.ok(app.includes("Auto Dispatch") || html.includes("Auto Dispatch"));
+assert.ok(app.includes("Despacho automático") || html.includes("Despacho automático"));
 assert.ok(app.includes("fetch("), "frontend must call the PHP API");
 
 console.log("Smoke test OK: dashboard shell, API wiring and docs are present.");
