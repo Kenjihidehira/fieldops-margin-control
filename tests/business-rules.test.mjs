@@ -23,7 +23,7 @@ const delayedOrders = seed.workOrders.filter((order) => order.sla !== "on_track"
 const readyInvoices = seed.invoices.filter((invoice) => invoice.state === "ready");
 
 assert.equal(projects.length, 6, "expected six commercial demo projects");
-assert.equal(totalMarginPercent, 12.8, "portfolio margin should match seed economics");
+assert.equal(totalMarginPercent, 12.8, "a margem do portfólio deve corresponder à economia dos dados de exemplo");
 assert.equal(materialShortages.length, 4, "material shortage count should be commercially relevant");
 assert.equal(delayedOrders.length, 3, "SLA queue should include breached and at-risk work orders");
 assert.equal(readyInvoices.length, 3, "billing automation needs ready invoices");

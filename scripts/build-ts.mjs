@@ -8,7 +8,7 @@ const targetPath = path.join(root, "public", "assets", "app.js");
 let source = fs.readFileSync(sourcePath, "utf8");
 
 source = source
-  .replace(/type\s+\w+\s*=\s*\{[\s\S]*?\};\n\n/g, "")
+  .replace(/type\s+\w+\s*=\s*\{[\s\S]*?\};\r?\n\r?\n/g, "")
   .replace(/\?: RequestInit/g, "")
   .replace(/: DashboardState/g, "")
   .replace(/: Project\[\]/g, "")

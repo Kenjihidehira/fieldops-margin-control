@@ -1,8 +1,8 @@
 # FieldOps Margin Control
 
-Dashboard comercial em PHP + TypeScript para empresas de obras e serviços de campo que precisam proteger margem de projeto enquanto coordenam equipes, materiais, ordens de serviço e faturamento.
+Painel comercial em PHP + TypeScript para empresas de obras e serviços de campo que precisam proteger margem de projeto enquanto coordenam equipes, materiais, ordens de serviço e faturamento.
 
-Este é um sistema de negócio para portfólio, não um scaffold de tutorial. Ele demonstra uma API PHP organizada em camadas de controller, service e repository, além de um frontend TypeScript consumindo endpoints reais.
+Este é um sistema de negócio para portfólio, não um modelo de tutorial. Ele demonstra uma API PHP organizada em camadas de controle, serviço e repositório, além de uma interface TypeScript consumindo endpoints reais.
 
 ## Valor Comercial
 
@@ -21,14 +21,14 @@ Empresas de serviço em campo costumam perder margem por atrasos em ordens de se
 - PHP 8.2+ com API leve em estilo MVC
 - Fonte TypeScript em `resources/ts/app.ts`
 - Módulo compilado para navegador em `public/assets/app.js`
-- Sistema visual do dashboard em `public/assets/styles.css`
-- Dados seed JSON em `data/seed.json`
+- Sistema visual do painel em `public/assets/styles.css`
+- Dados JSON de exemplo em `data/seed.json`
 - Scripts de validação em Node sem pacotes externos
-- Dockerfile para deploy com runtime PHP
+- Dockerfile para publicação com ambiente PHP
 
-## Telas / Preview
+## Telas e prévia
 
-Preview visual:
+Prévia visual:
 
 ```text
 docs/dashboard-preview.svg
@@ -40,7 +40,7 @@ Interface principal:
 - Quadro de margem por projeto com indicação de risco.
 - Fila de alertas.
 - Sugestões de automação.
-- Tabelas de ordens de serviço e invoices.
+- Tabelas de ordens de serviço e faturas.
 
 ## Endpoints da API
 
@@ -109,16 +109,16 @@ docker run --rm -p 8080:8080 fieldops-margin-control
 ## Diferenciais Comerciais
 
 - Domínio operacional e financeiro prático, útil em propostas freelance.
-- Backend API-first que pode evoluir para Laravel.
-- Frontend TypeScript com filtros reais e estado de automação.
-- Seed modelando economia de projetos, ordens, materiais, invoices e equipes.
+- Servidor orientado a API que pode evoluir para Laravel.
+- Interface TypeScript com filtros reais e estado de automação.
+- Dados de exemplo modelando economia de projetos, ordens, materiais, faturas e equipes.
 - Simulação de automação segura para demo, sem serviços externos ou secrets.
 
 ## Melhorias Possíveis
 
-- Substituir seed JSON por MySQL/PostgreSQL.
+- Substituir os dados JSON de exemplo por MySQL ou PostgreSQL.
 - Adicionar migrations/controllers Laravel se Composer estiver disponível.
 - Adicionar autenticação e permissões por perfil.
-- Exportar invoices em PDF.
+- Exportar faturas em PDF.
 - Integrar webhooks com QuickBooks, Slack ou WhatsApp.
 - Criar worker de fila para automações reais.

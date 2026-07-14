@@ -11,7 +11,7 @@ for (const text of [
   "Linha do tempo de ordens abertas",
   "Sugestões de automação",
   "Fila de SLA",
-  "Invoices pendentes"
+  "Faturas pendentes"
 ]) {
   assert.ok(html.includes(text), `HTML should include ${text}`);
 }

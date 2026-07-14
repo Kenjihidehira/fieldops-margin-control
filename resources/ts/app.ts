@@ -30,7 +30,7 @@ const state: DashboardState = {
 
 function qs(selector: string): HTMLElement {
   const node = document.querySelector(selector);
-  if (!node) throw new Error(`Missing element ${selector}`);
+  if (!node) throw new Error(`Elemento não encontrado: ${selector}`);
   return node as HTMLElement;
 }
 
@@ -78,7 +78,7 @@ function renderSummary(summary: any): void {
   qs("#openWorkOrders").textContent = String(summary.openWorkOrders);
   qs("#materialShortages").textContent = String(summary.materialShortages);
   qs("#pendingInvoices").textContent = money(summary.pendingInvoices);
-  qs("#invoiceCount").textContent = `${summary.invoiceCount} invoices`;
+  qs("#invoiceCount").textContent = `${summary.invoiceCount} faturas`;
 }
 
 function renderMarginMap(projects: Project[]): void {
@@ -110,14 +110,14 @@ function renderProjects(projects: Project[]): void {
     <article class="project-card ${project.risk}">
       <header>
         <span>${project.id}</span>
-        <b>${project.risk}</b>
+        <b>${label(project.risk)}</b>
       </header>
       <strong>${project.name}</strong>
       <small>${project.segment} | ${project.customer}</small>
       <div class="project-metrics">
         <div><span>${project.progress}%</span><small>progresso</small></div>
         <div><span>${project.forecastMargin}%</span><small>margem</small></div>
-        <div><span>${project.healthScore}</span><small>score</small></div>
+        <div><span>${project.healthScore}</span><small>pontuação</small></div>
       </div>
       <div class="risk-meter"><i style="width:${riskLoad(project)}%"></i></div>
       <footer><span>${money(project.marginAtRisk)}</span><small>margem em risco</small></footer>

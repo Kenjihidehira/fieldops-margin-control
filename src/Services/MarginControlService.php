@@ -127,7 +127,7 @@ final class MarginControlService
             ['severity' => 'high', 'title' => count($shortages) . ' faltas de material', 'detail' => 'R$ ' . number_format(array_sum(array_column($shortages, 'impact')), 0, ',', '.') . ' de impacto na margem.'],
             ['severity' => 'high', 'title' => count($criticalProjects) . ' projetos acima do orçamento', 'detail' => 'R$ ' . number_format(array_sum(array_column($criticalProjects, 'marginAtRisk')), 0, ',', '.') . ' em risco previsto.'],
             ['severity' => 'medium', 'title' => count($lowCrews) . ' equipes abaixo de 60%', 'detail' => 'Rebalancear mão de obra antes do fechamento da folha.'],
-            ['severity' => 'medium', 'title' => count($overdueInvoices) . ' invoices vencidas', 'detail' => 'Fluxo de cobrança já pode ser acionado.'],
+            ['severity' => 'medium', 'title' => count($overdueInvoices) . ' faturas vencidas', 'detail' => 'Fluxo de cobrança já pode ser acionado.'],
         ];
     }
 
@@ -145,7 +145,7 @@ final class MarginControlService
                 'count' => count($shortages),
             ],
             [
-                'action' => 'Enviar lembretes de invoice',
+                'action' => 'Enviar lembretes de fatura',
                 'channel' => 'Cobrança',
                 'impact' => 'R$ ' . number_format(array_sum(array_column($readyInvoices, 'amount')), 0, ',', '.') . ' prontos para cobrança',
                 'count' => count($readyInvoices),

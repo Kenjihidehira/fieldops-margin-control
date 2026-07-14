@@ -13,12 +13,12 @@ final class FieldOpsRepository
     public function __construct(string $seedPath)
     {
         if (!is_file($seedPath)) {
-            throw new RuntimeException('Arquivo seed não encontrado.');
+            throw new RuntimeException('Arquivo de dados de exemplo não encontrado.');
         }
 
         $payload = json_decode(file_get_contents($seedPath) ?: '', true);
         if (!is_array($payload)) {
-            throw new RuntimeException('Seed file is invalid JSON.');
+            throw new RuntimeException('O arquivo de dados de exemplo contém JSON inválido.');
         }
 
         $this->seed = $payload;

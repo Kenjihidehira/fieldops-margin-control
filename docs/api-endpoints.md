@@ -20,7 +20,7 @@ Retorna o status do serviço.
 GET /api/summary
 ```
 
-Retorna KPIs consolidados: percentual de margem, margem em valor, margem em risco, utilização da equipe, quantidade de ordens, falta de materiais, valor de invoices e atrasos de SLA.
+Retorna KPIs consolidados: percentual de margem, margem em valor, margem em risco, utilização da equipe, quantidade de ordens, falta de materiais, valor de faturas e atrasos de SLA.
 
 ## Projetos
 
@@ -28,7 +28,7 @@ Retorna KPIs consolidados: percentual de margem, margem em valor, margem em risc
 GET /api/projects
 ```
 
-Retorna economia dos projetos com margem prevista, lucro previsto, gap de margem, margem em risco e score de saúde.
+Retorna economia dos projetos com margem prevista, lucro previsto, diferença de margem, margem em risco e pontuação de saúde.
 
 ## Ordens de Serviço
 
@@ -42,7 +42,7 @@ Parâmetros suportados:
 - `priority`: `all`, `critical`, `high`, `medium`, `low`
 - `search`: busca livre por ordem, projeto ou cliente
 
-## Invoices
+## Faturas
 
 ```http
 GET /api/invoices?state=ready
