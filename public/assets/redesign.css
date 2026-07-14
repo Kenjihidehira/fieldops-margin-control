@@ -1,0 +1,35 @@
+:root { color-scheme: dark; }
+body { background: #171a19; color: #edf1ed; font-family: "Arial Narrow", Arial, sans-serif; }
+.app-shell { display: grid; grid-template-columns: 224px minmax(0, 1fr); min-height: 100vh; }
+.sidebar { position: sticky; top: 0; width: auto; height: 100vh; padding: 24px 16px; background: #222625; border-right: 5px solid #f2c94c; }
+.brand { color: #fff; text-transform: uppercase; }
+.brand-mark { border-radius: 0; background: #f2c94c; color: #171a19; }
+.brand small { color: #9ea8a2; }
+.nav-item { border-radius: 0; border-bottom: 1px solid #454d49; color: #c8d0cb; background: transparent; text-align: left; }
+.nav-item:hover, .nav-item.active { color: #171a19; background: #f2c94c; }
+.signal-stack { border-radius: 0; border: 1px dashed #65716a; background: #171a19; }
+.workspace { min-width: 0; margin: 0; padding: 22px 26px 44px; }
+.topbar { border-bottom: 2px solid #65716a; padding-bottom: 16px; }
+.topbar h1 { color: #fff; font-size: clamp(30px, 4vw, 48px); text-transform: uppercase; }
+.topbar p, .section-heading p, .rail-header p, .hero-copy p { color: #f2c94c; font-family: Consolas, monospace; }
+.topbar select, .icon-button, .primary-button { border-radius: 0; border: 1px solid #65716a; }
+.primary-button { background: #f2c94c; color: #171a19; box-shadow: 4px 4px 0 #000; }
+.cockpit-grid { gap: 12px; }
+.hero-cockpit, .decision-rail, .project-dock, .timeline-panel { border: 1px solid #56615b; border-radius: 0; background: #222625; box-shadow: none; }
+.hero-cockpit { box-shadow: inset 0 6px #f2c94c; }
+.hero-copy h2, .rail-header h2, .section-heading h2 { color: #fff; text-transform: uppercase; }
+.metric-ribbon { gap: 0; border: 1px solid #56615b; }
+.metric-ribbon article { border-radius: 0; border: 0; border-right: 1px solid #56615b; background: #171a19; }
+.metric-ribbon article:last-child { border-right: 0; }
+.metric-ribbon strong { color: #f2c94c; font-family: Consolas, monospace; }
+.margin-map { border-radius: 0; border: 1px solid #56615b; background-color: #101312; }
+.decision-rail { border-left: 5px solid #e46d45; }
+.alert-list > *, .automation-list > *, .project-board > * { border-radius: 0; border-color: #56615b; background: #1a1e1c; }
+.section-heading, .rail-header { border-bottom: 1px solid #56615b; }
+@media (max-width: 1050px) {
+  .app-shell { display: block; }
+  .sidebar { position: static; height: auto; border-right: 0; border-bottom: 5px solid #f2c94c; }
+  .nav-list { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .cockpit-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) { .workspace { padding: 16px 10px 32px; } .metric-ribbon { grid-template-columns: 1fr 1fr; } }
