@@ -1,8 +1,20 @@
 # FieldOps Margin Control
 
+[![CI](https://github.com/Kenjihidehira/fieldops-margin-control/actions/workflows/ci.yml/badge.svg)](https://github.com/Kenjihidehira/fieldops-margin-control/actions/workflows/ci.yml)
+[![Demo pública](https://img.shields.io/badge/demo-pública-0f766e)](https://fieldops-margin.dadosepesquisa.chatgpt.site)
+
 Painel comercial em PHP + TypeScript para empresas de obras e serviços de campo que precisam proteger margem de projeto enquanto coordenam equipes, materiais, ordens de serviço e faturamento.
 
 Este é um sistema de negócio para portfólio, não um modelo de tutorial. Ele demonstra uma API PHP organizada em camadas de controle, serviço e repositório, além de uma interface TypeScript consumindo endpoints reais.
+
+## Prova comercial publicada
+
+- **Demo:** [fieldops-margin.dadosepesquisa.chatgpt.site](https://fieldops-margin.dadosepesquisa.chatgpt.site)
+- **Autenticação:** indicadores públicos de demonstração e execuções operacionais protegidas por Sign in with ChatGPT.
+- **Persistência:** projetos, ordens e auditoria de automações ficam em workspace D1 isolado por usuário.
+- **Segurança operacional:** a automação registra intenção e auditoria, sem fechar ordens ou SLA automaticamente.
+- **Entrega:** CI valida PHP, TypeScript, regras de negócio, build Vinext e migration reversível.
+- **Arquitetura:** [`docs/architecture.md`](docs/architecture.md).
 
 ## Valor Comercial
 
@@ -25,6 +37,7 @@ Empresas de serviço em campo costumam perder margem por atrasos em ordens de se
 - Dados JSON de exemplo em `data/seed.json`
 - Scripts de validação em Node sem pacotes externos
 - Dockerfile para publicação com ambiente PHP
+- Vinext/React e Cloudflare D1 na versão comercial hospedada
 
 ## Telas e prévia
 
@@ -106,6 +119,8 @@ docker build -t fieldops-margin-control .
 docker run --rm -p 8080:8080 fieldops-margin-control
 ```
 
+A versão comercial está publicada no [OpenAI Sites](https://fieldops-margin.dadosepesquisa.chatgpt.site). O código implantado e sua configuração ficam em `sites/`; a API PHP continua sendo uma alternativa executável por Docker.
+
 ## Diferenciais Comerciais
 
 - Domínio operacional e financeiro prático, útil em propostas freelance.
@@ -116,9 +131,9 @@ docker run --rm -p 8080:8080 fieldops-margin-control
 
 ## Melhorias Possíveis
 
-- Substituir os dados JSON de exemplo por MySQL ou PostgreSQL.
+- Adaptar MySQL ou PostgreSQL para instalações da API PHP fora do Sites.
 - Adicionar migrations/controllers Laravel se Composer estiver disponível.
-- Adicionar autenticação e permissões por perfil.
+- Adicionar permissões granulares por perfil.
 - Exportar faturas em PDF.
 - Integrar webhooks com QuickBooks, Slack ou WhatsApp.
 - Criar worker de fila para automações reais.
