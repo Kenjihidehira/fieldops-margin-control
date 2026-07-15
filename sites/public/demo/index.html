@@ -15,12 +15,12 @@
           <span><strong>FieldOps</strong><small>Margin Control</small></span>
         </a>
         <nav class="nav-list" aria-label="Principal">
-          <button class="nav-item active" type="button">Cockpit</button>
-          <button class="nav-item" type="button">Mapa de margem</button>
-          <button class="nav-item" type="button">Fila de SLA</button>
-          <button class="nav-item" type="button">Carga da equipe</button>
-          <button class="nav-item" type="button">Risco de material</button>
-          <button class="nav-item" type="button">Pulso financeiro</button>
+          <a class="nav-item active" href="#cockpit">Cockpit</a>
+          <a class="nav-item" href="#margin-map-section">Mapa de margem</a>
+          <a class="nav-item" href="#sla-queue">Fila de SLA</a>
+          <a class="nav-item" href="#projects">Projetos</a>
+          <a class="nav-item" href="#work-orders">Ordens de servico</a>
+          <a class="nav-item" href="#billing">Pulso financeiro</a>
         </nav>
         <section class="signal-stack" aria-label="Status do sistema">
           <span><b></b> API online</span>
@@ -36,22 +36,14 @@
             <h1>Central de margem em campo</h1>
           </div>
           <div class="topbar-controls">
-            <select id="companyFilter" aria-label="Empresa">
-              <option>Todas as empresas</option>
-              <option>Divisão comercial</option>
-              <option>Divisão de serviços</option>
-            </select>
-            <select id="periodFilter" aria-label="Period">
-              <option>May 12 - May 18, 2026</option>
-              <option>May 05 - May 11, 2026</option>
-            </select>
-            <button id="refreshBtn" class="icon-button" type="button" aria-label="Atualizar">R</button>
+            <span class="period-chip">12 a 18 mai 2026</span>
+            <button id="refreshBtn" class="icon-button" type="button" aria-label="Atualizar dados" title="Atualizar dados">&#8635;</button>
             <button id="runAutomationBtn" class="primary-button" type="button">Despacho automático</button>
           </div>
         </header>
 
-        <section class="cockpit-grid">
-          <section class="hero-cockpit" aria-labelledby="heatmapTitle">
+        <section id="cockpit" class="cockpit-grid">
+          <section id="margin-map-section" class="hero-cockpit" aria-labelledby="heatmapTitle">
             <div class="hero-copy">
               <p>Mapa de margem</p>
               <h2 id="heatmapTitle">Constelação de risco dos projetos</h2>
@@ -92,7 +84,7 @@
             <div id="marginMap" class="margin-map" aria-label="Mapa de margem dos projetos"></div>
           </section>
 
-          <aside class="decision-rail" aria-labelledby="decisionTitle">
+          <aside id="sla-queue" class="decision-rail" aria-labelledby="decisionTitle">
             <div class="rail-header">
               <p>Fila de decisão</p>
               <h2 id="decisionTitle">Fila de SLA</h2>
@@ -107,24 +99,28 @@
             </div>
           </aside>
 
-          <section class="project-dock" aria-labelledby="projectTitle">
+          <section id="projects" class="project-dock" aria-labelledby="projectTitle">
             <div class="section-heading">
               <div>
                 <p>Projetos ativos</p>
                 <h2 id="projectTitle">Quadro de recuperação de margem</h2>
+                <span id="projectCount" class="result-count">Carregando projetos...</span>
               </div>
-              <select id="riskFilter" aria-label="Risco do projeto">
-                <option value="all">Todos os riscos</option>
-                <option value="critical">Crítico</option>
-                <option value="high">Alto</option>
-                <option value="moderate">Moderado</option>
-                <option value="low">Baixo</option>
-              </select>
+              <div class="compact-toolbar">
+                <select id="riskFilter" aria-label="Risco do projeto">
+                  <option value="all">Todos os riscos</option>
+                  <option value="critical">Crítico</option>
+                  <option value="high">Alto</option>
+                  <option value="moderate">Moderado</option>
+                  <option value="low">Baixo</option>
+                </select>
+                <button id="clearProjectFilter" class="ghost-button" type="button">Limpar</button>
+              </div>
             </div>
-            <div id="projectBoard" class="project-board"></div>
+            <div id="projectBoard" class="project-board" aria-live="polite" aria-busy="true"></div>
           </section>
 
-          <section class="timeline-panel" aria-labelledby="ordersTitle">
+          <section id="work-orders" class="timeline-panel" aria-labelledby="ordersTitle">
             <div class="section-heading">
               <div>
                 <p id="workOrderCount">Carregando ordens de serviço...</p>
@@ -146,12 +142,13 @@
                   <option value="medium">Média</option>
                   <option value="low">Baixa</option>
                 </select>
+                <button id="clearOrderFilters" class="ghost-button" type="button">Limpar</button>
               </div>
             </div>
-            <div id="workOrderBody" class="timeline-list"></div>
+            <div id="workOrderBody" class="timeline-list" aria-live="polite" aria-busy="true"></div>
           </section>
 
-          <section class="billing-panel" aria-labelledby="invoiceTitle">
+          <section id="billing" class="billing-panel" aria-labelledby="invoiceTitle">
             <div class="section-heading compact">
               <div>
                 <p>Sinal de caixa</p>
